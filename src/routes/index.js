@@ -36,17 +36,6 @@ router.post('/send-email', async (req, res) => {
 
 //configurando el nodemail, para enviar los correos por el smtp
 const transporter = nodemailer.createTransport({
-    // host: 'mail.laideatech.net',
-    // port: 465,
-    // secure:true,
-    // auth: {
-    //     user: 'barf@laideatech.net',
-    //     pass: 'b4rf2022.*'
-    // },
-    // tls: {
-    //     rejectUnauthorized: false
-    // }
-
     host: process.env.HOST_SMTP,
     port: process.env.SEC_PORT_EMAIL,
     secure:true,
@@ -62,8 +51,11 @@ const transporter = nodemailer.createTransport({
 //Com esto es un metodo asincrono, se deben usar promesas.
 
 const info = await transporter.sendMail({
-    from: "'BARF Server' <barf@laideatech.net>",
-    to: 'guaroguerito@gmail.com',
+    // from: "'BARF Server' <barf@Dominio>",
+    // to: 'cuenta@Dominio',
+
+    from: `BARF Server <${process.env.EMAIL_ACCOUNT_SERVER}>`,
+    to: `${process.env.TO_EMAIL_ACCOUNT}`,
     subject: 'Website contact form',
     html: contentHTML
    
