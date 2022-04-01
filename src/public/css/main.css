@@ -1,0 +1,41 @@
+.navbar {
+    box-shadow: 2px 2px 5px #000;
+    opacity: .9;
+}
+
+.nabvar .nav-item .nav-link {
+    /* Color del Text */
+    color: #fff;
+}
+
+.main-header {
+    background: url(../img/background_05.jpg) ;
+    background-size: cover;
+    min-height: 800px;
+    position: relative;
+
+}
+
+.background-overlay {
+    /* background: rgba(48, 51, 107,0.6); */
+    /* background: rgba(186, 220, 88,0.6); */
+    /* background: rgba(83, 92, 104,0.7); */
+    /* background: rgba(255, 190, 118,0.5); */
+    /* background: rgba(16, 172, 132,0.6); */
+
+    background: rgba(19, 15, 64,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Quitando el estilo del borde redondeado de los input y los botones */
+.form-control, .btn {
+    border-radius: 0;
+}
+
+.team, footer {
+    background: #30336b;
+}
