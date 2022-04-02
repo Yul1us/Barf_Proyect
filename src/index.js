@@ -30,7 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //servidor escuchando en el puerto 3000
 // app.listen(3000, () => {
-app.listen(process.env.PORT || 4000, () => {
+// app.listen(process.env.PORT || 4000, () => {
+    app.listen(3000, () => {
     console.log('Server running on port:', process.env.PORT);
 });
 
