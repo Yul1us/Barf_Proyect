@@ -5,8 +5,12 @@ const router = Router();
 require('dotenv').config();
 
 //importando nodemailer
-const nodemailer = require('nodemailer');
-
+  const nodemailer = require('nodemailer');
+  const MS_EMAIL_ACCOUNT_SERVER = process.env['EMAIL_ACCOUNT_SERVER'];
+  const MS_HOST_SMTP = process.env['HOST_SMTP'];
+  const MS_SEC_PORT_EMAIL = process.env['SEC_PORT_EMAIL'];
+  const MS_PASSWORD_EMAIL_SERVER = process.env['PASSWORD_EMAIL_SERVER'];
+  const MS_TO_EMAIL_ACCOUNT = process.env['TO_EMAIL_ACCOUNT'];
 //Ruta: /send-email
 router.post('/send-email', async (req, res) => {
     // console.log(req.body);
@@ -23,25 +27,31 @@ router.post('/send-email', async (req, res) => {
         <p>Message: ${message}</p>
     `;
     console.log(contentHTML);
+
+  
     // res.send('Received Email...');
-    console.log('HOST_SMTP:', process.env.HOST_SMTP);
-    console.log('SEC_PORT_EMAIL:', process.env.SEC_PORT_EMAIL);
-    console.log('PASSWORD_EMAIL_SERVER:', process.env.PASSWORD_EMAIL_SERVER);
-    console.log('EMAIL_ACCOUNT_SERVER:', process.env.EMAIL_ACCOUNT_SERVER);
-    console.log('EMAIL_ACCOUNT_SERVER:', process.env.TO_EMAIL_ACCOUNT);
-    
+    // console.log('HOST_SMTP:', process.env.HOST_SMTP);
+    // console.log('SEC_PORT_EMAIL:', process.env.SEC_PORT_EMAIL);
+    // console.log('PASSWORD_EMAIL_SERVER:', process.env.PASSWORD_EMAIL_SERVER);
+    // console.log('EMAIL_ACCOUNT_SERVER:', process.env.EMAIL_ACCOUNT_SERVER);
+    // console.log('EMAIL_ACCOUNT_SERVER:', process.env.TO_EMAIL_ACCOUNT);
+    console.log('HOST_SMTP:', MS_HOST_SMTP);
+    console.log('SEC_PORT_EMAIL:', MS_SEC_PORT_EMAIL);
+    console.log('PASSWORD_EMAIL_SERVER:', MS_PASSWORD_EMAIL_SERVER);
+    console.log('EMAIL_ACCOUNT_SERVER:', MS_EMAIL_ACCOUNT_SERVER);
+    console.log('EMAIL_ACCOUNT_SERVER:', MS_TO_EMAIL_ACCOUNT); 
 //Se deben agregar variables de entorno.
 //todo estas variables se guarda en: prosess.env -> procesos del entorno.
 
 
 //configurando el nodemail, para enviar los correos por el smtp
 const transporter = nodemailer.createTransport({
-    host: process.env.HOST_SMTP,
-    port: process.env.SEC_PORT_EMAIL,
+    host: MS_HOST_SMTP,
+    port: MS_SEC_PORT_EMAIL,
     secure:true,
     auth: {
-        user: process.env.EMAIL_ACCOUNT_SERVER,
-        pass: process.env.PASSWORD_EMAIL_SERVER
+        user: MS_EMAIL_ACCOUNT_SERVER,
+        pass: MS_PASSWORD_EMAIL_SERVER
     },
     tls: {
         rejectUnauthorized: false
@@ -54,8 +64,8 @@ const info = await transporter.sendMail({
     // from: "'BARF Server' <barf@Dominio>",
     // to: 'cuenta@Dominio',
 
-    from: `BARF Server <${process.env.EMAIL_ACCOUNT_SERVER}>`,
-    to: `${process.env.TO_EMAIL_ACCOUNT}`,
+    from: `BARF Server <${MS_EMAIL_ACCOUNT_SERVER}>`,
+    to: `${MS_TO_EMAIL_ACCOUNT}`,
     subject: 'Website contact form',
     html: contentHTML
    
